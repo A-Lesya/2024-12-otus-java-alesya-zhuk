@@ -1,16 +1,12 @@
 package homework;
 
+import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class CustomerService {
 
-    private final TreeMap<Customer, String> map = new TreeMap<>((o1, o2) -> {
-        if (o1 == null && o2 == null) return 0;
-        if (o1 == null) return -1;
-        if (o2 == null) return 1;
-        return Long.compare(o1.getScores(), o2.getScores());
-    });
+    private final TreeMap<Customer, String> map = new TreeMap<>(Comparator.comparingLong(Customer::getScores));
 
     public Map.Entry<Customer, String> getSmallest() {
         var entry = map.firstEntry();
